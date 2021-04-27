@@ -1,0 +1,164 @@
+import java.util.ArrayList;
+/**
+ * This program compares contents of array lists using the 
+ * methods isOrderInts and isOrderStrings to see if a list is in lexicographic order.
+ * @author Thomas Putman
+ * @version April 10, 2019
+ *
+ */
+public class ArrayListChecker {
+		/**
+		 * This method checks if an ArrayList of Integers is in 
+		 * ascending order.
+		 * @param list being checked if it is in order.
+		 * @return true if in ascending or false if not
+		 */
+		public static boolean isOrderInts(ArrayList<Integer> a) {
+	        for ( int i = 0; i < a.size() -1; i++) { 
+	            if (a.get(i) > a.get(i+1)) {      
+	                return false;  
+	            }        
+	        }
+	        return true;  
+	    }  
+
+
+		/**
+		 * This method checks if an ArrayList of Strings is in 
+		 * lexicographic order.
+		 * @param list being checked if it is in order
+		 * @return True if in lexicographic order or false if not in order
+		 */
+		public static boolean isOrderStrings (ArrayList<String> b) {
+			 String temp = b.get(0);  
+		        for (int i = 0; i < b.size(); i++) {  
+		            if (temp.compareTo(b.get(i)) > 0) {  
+		                return false;  
+		            }  
+		        }  
+		       return true;  
+		    }  
+		} 
+--------------------------------------------------------------------------------------------------------
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
+import org.junit.Test;
+/**
+ * This JUnit test case tests the method isOrderInts and isOrderStrings from the ArrayListChecker class
+ * 8 tests total: testPositiveAscendingNumbers(), testPositiveDesendingOrder(), testOneElementArray(), testSameNumber(),
+ * testAscendingWords(), testOneElementArrayString(), testSameStartofWord(), testNotAscendingOrder().
+ * 
+ * @author Thomas Putman
+ * @version March 13, 2018
+ * 
+ */
+public class TestArrayListChecker {
+	/**
+	 * This tests method isOrderInts to ensure that the test returns true when testing
+	 * for numbers that are in ascending order.
+	 */
+	@Test
+	public void testPositiveAscendingNumbers() {
+		ArrayList<Integer>a = new ArrayList<Integer>();
+		a.add(0,1);
+		a.add(1,2);
+		a.add(2,3);
+		a.add(3,4);
+		a.add(4,5);
+		a.add(5,6);
+		assertTrue(ArrayListChecker.isOrderInts(a));
+	}
+	/**
+	 * This tests method isOrderInts to ensure that the test returns false when testing 
+	 * for numbers that are in ascending order because in fact they are in descending order.
+	 */
+	@Test
+	public void testPositiveDesendingOrder() {
+		ArrayList<Integer>a = new ArrayList<Integer>();
+		a.add(0,5);
+		a.add(1,4);
+		a.add(2,3);
+		a.add(3,2);
+		a.add(4,1);
+		a.add(5,0);
+		assertFalse(ArrayListChecker.isOrderInts(a));
+	}
+	/**
+	 * This tests method isOrderInts to ensure that the test returns true even when 
+	 * testing for a 1 element array
+	 */
+		@Test
+	public void testOneElementArray() {
+		ArrayList<Integer>a = new ArrayList<Integer>();
+		a.add(0,33);
+		assertTrue(ArrayListChecker.isOrderInts(a));
+	}
+	/**
+	 * This tests method isOrderInts to insure that the same number in a set 
+	 * returns true because it is still considered ascending order.
+	 */
+	@Test
+	public void testSameNumber() {
+		ArrayList<Integer>a = new ArrayList<Integer>();
+		a.add(0,33);
+		a.add(1,33);
+		a.add(2,33);
+		a.add(3,33);
+		a.add(4,33);
+		assertTrue(ArrayListChecker.isOrderInts(a));
+	}
+	/**
+	 * This tests method isOrderStrings to ensure that the program returns 
+	 * true on a basic set of words in ascending order.
+	 */
+	@Test
+	public void testAscendingWords() {
+		ArrayList<String> b = new ArrayList<String>(); 
+		b.add(0, "apple");
+		b.add(1, "bear");
+		b.add(2, "cat");
+		b.add(3, "snail");
+        assertTrue(ArrayListChecker.isOrderStrings(b));  
+	}
+	/**
+	 * This tests method isOrderStrings to ensure that the test returns true even when 
+	 * testing for a 1 element array
+	 */
+	@Test
+	public void testOneElementArrayString() {
+		ArrayList<String> b = new ArrayList<String>(); 
+		b.add(0, "Bear");
+		 assertTrue(ArrayListChecker.isOrderStrings(b));
+	}
+	/**
+	* This tests method isOrderStrings to ensure that the program returns true when 
+	* the first letter is the same in all of the words, but it checks the next numbers 
+	* to see if it is in ascending order.
+    */
+	@Test
+	public void testSameStartOfWord() {
+		ArrayList<String> b = new ArrayList<String>();
+		b.add(0, "Tammy");
+		b.add(1, "Ten");
+		b.add(2, "Tommy");
+		b.add(3, "Tracey");
+		assertTrue(ArrayListChecker.isOrderStrings(b));
+	}
+	/**
+	* This tests method isOrderStrings to ensure that the program will return
+	* false when testing for ascending order because this is not in ascending order.
+	*/
+	@Test
+	public void testNotAscendingOrder() {
+		ArrayList<String> b = new ArrayList<String>();
+		b.add(0, "Pear");
+		b.add(1, "Cat");
+		b.add(2, "Family");
+		b.add(3, "Giraffe");
+		b.add(4, "Pencil");
+		assertFalse(ArrayListChecker.isOrderStrings(b));
+	}
+}
+

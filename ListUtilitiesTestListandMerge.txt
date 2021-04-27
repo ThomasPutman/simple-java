@@ -1,0 +1,216 @@
+import java.util.ArrayList;
+/**
+ * This program compares contents of Strings using the method
+ * isOrderStrings to see if a list is in lexicographic order.
+ * This program also uses to contents of two lists and checks 
+ * that they are in order, and if they are it will merge them in
+ * lexicographic order, if not it returns null.
+ * @author Thomas Putman
+ * @version April 30, 2019
+ */
+public class ListUtilities {
+	/**
+	 * This method checks if an ArrayList of Strings is in 
+	 * lexicographic order
+	 * @param slist being checked if it is in order
+	 * @return true if in lexicographic order, false if not
+	 */
+	public static boolean arrayListString(ArrayList<String>  sList) {
+				try {
+						sList.get(0);
+				}
+	catch(IndexOutOfBoundsException e) {
+							return false;
+	}
+				String temp = sList.get(0);
+				for (int i = 0; i < sList.size(); i++) {
+					if
+		(temp.compareTo(sList.get(i)) > 0) {
+						return false;
+					}
+					temp=sList.get(i);
+				}
+				return true;
+			}
+	/**
+	 * This method first checks if a and b are in order by calling method arrayListString.
+	 * If they are in order, it merges the two lists, if they are not it returns null.
+	 * @param a an ArrayList of Strings being checked if it is in order
+	 * @param b an ArrayList of Strings being checked if it is in order
+	 * @return result (merged list), if a and b are true, if not it returns null
+	 */
+	public static ArrayList<String> merge(ArrayList<String> a, ArrayList<String> b) {
+		if (ListUtilities.arrayListString(a) &&
+		ListUtilities.arrayListString(b)) {
+			int i = 0;
+		    int j = 0;
+		    ArrayList<String> result = new ArrayList<String>();
+		    while (i < a.size() && j < b.size()) {
+		        if (a.get(i).compareTo(b.get(j)) < 0) {
+		            result.add(a.get(i));
+		            i++;
+		        } else {
+		            result.add(b.get(j));
+		            j++;
+		        }
+		    }
+
+		    while (i < a.size()) {
+		        result.add(a.get(i));
+		        i++;
+		    }
+
+		    while (j < b.size()) {
+		        result.add(b.get(j));
+		        j++;
+		    }
+			return result;
+		}
+		else {
+			
+		return null;
+		
+		}    
+	}
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
+import org.junit.Test;
+/**
+ * This program is a JUnit test case that checks if a list is in lexicographic
+ * order using method arrayListString and merges two lists using method merge.
+ * If the lists are not initially in order, it checks that it is equal to null. 
+ * Both methods called are from ListUtilites.Java. The Test cases include,
+ *  "testAscendingWords(),testOneElementArrayString(), testSameStartOfWord(), testOutOfOrderList(),
+ * testBasicMerge (), testOneStringArray (), testBothListsOutOfOrder (),testOneListOutofOrder ()".
+ * @author Thomas Putman
+ * @version 5/2/2019
+ */
+public class TestListAndMerge {
+	/**
+	 * This tests method arrayListString to ensure that the program returns 
+	 * true on a basic set of words in ascending order.
+	 */
+	@Test
+	public void testAscendingWords() {
+		ArrayList<String> b = new ArrayList<String>(); 
+		b.add(0, "apple");
+		b.add(1, "bear");
+		b.add(2, "cat");
+		b.add(3, "snail");
+        assertTrue(ListUtilities.arrayListString(b));  
+	}
+	/**
+	 * This tests method arrayListString to ensure that the test returns true even when 
+	 * testing for a 1 element array
+	 */
+	@Test
+	public void testOneElementArrayString() {
+		ArrayList<String> b = new ArrayList<String>(); 
+		b.add(0, "Bear");
+		 assertTrue(ListUtilities.arrayListString(b)); 
+	}
+	/**
+	* This tests method arrayListString to ensure that the program returns true when 
+	* the first letter is the same in all of the words, but it checks the next numbers 
+	* to see if it is in ascending order.
+    */
+	@Test
+	public void testSameStartOfWord() {
+		ArrayList<String> b = new ArrayList<String>();
+		b.add(0, "Tammy");
+		b.add(1, "Ten");
+		b.add(2, "Tommy");
+		b.add(3, "Tracey");
+		assertTrue(ListUtilities.arrayListString(b)); 
+	}
+	/**
+	* This tests method arrayListString to ensure that the program will return
+	* false when testing for ascending order because this is not in ascending order.
+	*/
+	@Test
+	public void testOutOfOrderList() {
+		ArrayList<String> b = new ArrayList<String>();
+		b.add(0, "Pear");
+		b.add(1, "Cat");
+		b.add(2, "Family");
+		b.add(3, "Giraffe");
+		b.add(4, "Pencil");
+		assertFalse(ListUtilities.arrayListString(b)); 
+	}
+	/**
+	 * This test first merges Lista and Listb that were created, then tests the 
+	 * merged list "c" with method arrayListString and returns true if it is in
+	 * lexicographic order
+	 */
+	@Test
+	public void testBasicMerge () {
+		ArrayList<String> Lista = new ArrayList<String> ();
+		Lista.add(0, "Alex");
+		Lista.add(1,"Ben");
+		Lista.add(2,"Carl");
+		Lista.add(3,"Zach");
+		ArrayList<String> Listb = new ArrayList<String> ();
+		Listb.add(0, "Jeremy");
+		Listb.add(1, "Karl");
+		Listb.add(2, "Larry");
+		Listb.add(3, "Maddy");
+		ArrayList<String> mergedList = new ArrayList<String> (ListUtilities.merge(Lista, Listb));
+		assertTrue(ListUtilities.arrayListString(mergedList));
+	}
+	/**
+	 * This test first merges Lista and Listb that were created, then tests the 
+	 * merged list "c" with method arrayListString and returns true even for a 
+	 * one String Array.
+	 */
+	@Test
+	public void testOneStringArray () {
+		ArrayList<String> Lista = new ArrayList<String> ();
+		Lista.add(0, "Zebra");
+		ArrayList<String> Listb = new ArrayList<String> ();
+		Listb.add(0, "Jeremy");
+		ArrayList<String> mergedList = new ArrayList<String> (ListUtilities.merge(Lista, Listb));
+		assertTrue(ListUtilities.arrayListString(mergedList));
+	}
+	/**
+	 * This test does not merge the two lists since they are not in order, instead it tests
+	 * that it returns null as you can not merge two lists that are not in order.
+	 */
+	@Test
+	public void testBothListsOutOfOrder () {
+		ArrayList<String> Lista = new ArrayList<String> ();
+		Lista.add(0, "zaza");
+		Lista.add(1, "abercromie");
+		Lista.add(2, "jamison");
+		ArrayList<String> Listb = new ArrayList<String> ();
+		Listb.add(0, "andy");
+		Listb.add(1, "zach");
+		Listb.add(2, "barry");
+		assertEquals(null, ListUtilities.merge(Lista,Listb));
+	}
+	/**
+	 * This test does not merge the two lists since one of them is not in order, instead it
+	 * tests that it returns null as you can not merge two lists when one is not in order.
+	 */
+	public void testOneListOutofOrder () {
+		ArrayList<String> Lista = new ArrayList<String> ();
+		Lista.add(0, "apple");
+		Lista.add(1, "bear");
+		Lista.add(3, "cat");
+		ArrayList<String> Listb = new ArrayList<String> ();
+		Listb.add(0, "zach");
+		Listb.add(1, "cat");
+		Listb.add(2, "dog");
+		assertEquals(null, ListUtilities.merge(Lista,Listb));
+	}
+
+
+}
+
+
+		
+				
+	

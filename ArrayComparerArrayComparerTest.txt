@@ -1,0 +1,133 @@
+/**
+ * This program compares the contents of two arrays of ints
+ * and compares the contents of two arrays of Strings
+ * @author Thomas Putman
+ * @version 2/20/2019
+ */
+
+public class ArrayComparer {
+	/*
+	 * This method compares the two arrays of int arr1 and int arr2
+	 */
+
+	public static boolean compareInts (int[]arr1, int[]arr2) {
+
+		for (int i = 0; i < arr1.length;)
+		for (int j = 0; i < arr2.length;){		
+
+				if (arr1[i] == arr2[j]){
+					return true;
+				}
+				else {
+					return false;
+				}
+		}
+		return false;
+				}
+	/*
+	 * This method compares two arrays of string arr1 and string arr2
+	 */
+	
+	public static boolean compareStrings (String[]arr1, String[]arr2) {
+	
+		for (int i = 0; i < arr1.length;)
+		for (int j = 0; i < arr2.length;){
+			
+			if (arr1[i]== arr2[j]) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		return false;
+	}
+}
+----------------------------------------------------------------------------------------------------
+import org.junit.Test;
+import static org.junit.Assert.*;
+/**
+ * This JUnit Test case tests the method compreInts 4 times, and also
+ * tests the compareStrings method 4 times
+ * @author Thomas Putman
+ * @version 2/20/2019
+ */
+
+public class ArrayComparerTest {
+	/**
+	 * This tests method compareInts
+	 */
+	@Test
+	public void IntArrayTest1() {
+		int[] arr1 = {1, 2, 3};
+		int[] arr2 = {1, 2, 3};
+		assertTrue(ArrayComparer.compareInts(arr1, arr2));
+	}
+	/**
+	 * This tests method compareInts
+	 */
+	@Test
+	public void IntArrayTest2() {
+		int[] arr1 = {4, 8, 3};
+		int[] arr2 = {3, 9, 3};
+		assertFalse(ArrayComparer.compareInts(arr1, arr2));
+	}
+	/**
+	 * This tests method compareInts
+	 */
+	@Test
+	public void IntArrayTest3() {
+		int[] arr1 = {7, 8, 2};
+		int[] arr2 = {7, 8, 2};
+		assertTrue(ArrayComparer.compareInts(arr1, arr2));
+	}
+	/**
+	 * This tests method compareInts
+	 */
+	@Test
+	public void IntArrayTest4() {
+		int[] arr1 = {2, 9, 1};
+		int[] arr2 = {7, 3, 1};
+		assertFalse(ArrayComparer.compareInts(arr1, arr2));
+	}
+	/**
+	 * This tests method compareStrings
+	 */
+	@Test
+	public void StringArrayTest1() {
+		String[] arr1 = {"a", "z", "8"};
+		String[] arr2 = {"a", "z", "8"};
+		assertTrue(ArrayComparer.compareStrings(arr1, arr2));
+	}
+	/**
+	 * This tests method compareStrings
+	 */
+	@Test
+	public void StringArrayTest2() {
+		String[] arr1 = {"b", "q", "2"};
+		String[] arr2 = {"f", "g", "9"};
+		assertFalse(ArrayComparer.compareStrings(arr1, arr2));
+	}
+	/**
+	 * This tests method compareStrings
+	 */
+	@Test
+	public void StringArrayTest3() {
+		String[] arr1 = {"g", "ap", "pe"};
+		String[] arr2 = {"g", "ap", "pe"};
+		assertTrue(ArrayComparer.compareStrings(arr1, arr2));
+	}
+	/**
+	 * This tests method compareStrings
+	 */
+	@Test
+	public void StringArrayTest4() {
+		String[] arr1 = {"t", "o", "m"};
+		String[] arr2 = {"p", "u", "t"};
+		assertFalse(ArrayComparer.compareStrings(arr1, arr2));
+	}
+
+
+}
+
+
